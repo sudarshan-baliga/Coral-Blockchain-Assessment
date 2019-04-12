@@ -1,0 +1,30 @@
+.formContainer{
+    max-width: 90%;
+    position: absolute;
+    width: 480px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0px 0px 5px #333;
+}
+
+.inpField {
+    width: 90%;
+    margin: 10px !important;
+}
+
+#snackMsg
+{
+    padding: 5px !important;
+    white-space:pre-line;
+}  
+
+/* fix for alignment problem in snackbar */
+div.snackBar > div
+{
+    justify-content: center !important;
+}
