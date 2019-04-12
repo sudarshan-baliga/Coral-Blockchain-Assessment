@@ -71,7 +71,7 @@ export default class Form extends Component {
         console.log(this.state);
         this.validate();
         if (this.state.formValid) {
-
+            //make request to the server
         }
         else
             this.setState({ snackShow: true });
@@ -115,7 +115,7 @@ export default class Form extends Component {
                         onChange={this.handleFormInpChange("phone")}
                     />
                     <Button variant="contained" color="primary" onClick={this.submitForm} >
-                        Primary
+                        Submit
                 </Button>
 
                 </form>
