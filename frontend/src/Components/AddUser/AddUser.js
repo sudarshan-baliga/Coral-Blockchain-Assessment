@@ -16,7 +16,8 @@ export default class AddUser extends Component {
         phone: "",
         formValid: false,
         snackShow: false,
-        snackMessage: ""
+        snackMessage: "",
+        snackClass: "redBackground"
     };
     //different fields in the form
     fields = ["email", "password", "phone", "userName"];
@@ -79,13 +80,13 @@ export default class AddUser extends Component {
                     userName: this.state.userName,
                     phone: this.state.phone
                 }
-                insertUsr(userData).then(response =>{
+                insertUsr(userData).then(response => {
                     console.log(response, "in user");
-                    this.setState({snackMessage:response.message, snackShow: true});
+                    this.setState({ snackMessage: response.message, snackShow: true, snackClass: "greenBackground" });
                 })
             }
             else
-                this.setState({ snackShow: true });
+                this.setState({ snackShow: true, snackClass: "redBackground" });
 
         })
             .catch(err => {

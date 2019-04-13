@@ -55,7 +55,7 @@ export default class AddUser extends Component {
                     autoHideDuration={10000}
                     onClose={this.props.hideSnack}
                     message={<span id="snackMsg">{this.props.snackMessage}</span>}
-                    className="snackBar"
+                    className={ "snackBar " + this.props.snackClass } 
                 />
             </Fragment>
         )
