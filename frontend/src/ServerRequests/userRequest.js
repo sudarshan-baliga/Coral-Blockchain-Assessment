@@ -8,6 +8,30 @@ export function insertUsr(userData) {
         phone: userData.phone,
         password: userData.password
     };
+    return new Promise((resolve, reject) => {
+        fetch(reqUrl, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        }).then(res => {
+            res.json().then(json => {
+                resolve(json);
+            });
+        }).catch(err => {
+            err.json().then(json => {
+                reject(json);
+            });
+        })
+    });
+}
+
+export function searchUser(userData) {
+    let reqUrl = URL + "/searchUser";
+    let body = {
+        email: userData.email,
+    };
     console.log("body", body);
     return new Promise((resolve, reject) => {
         fetch(reqUrl, {
@@ -18,12 +42,10 @@ export function insertUsr(userData) {
             body: JSON.stringify(body)
         }).then(res => {
             res.json().then(json => {
-                console.log(json);
                 resolve(json);
             });
         }).catch(err => {
             err.json().then(json => {
-                console.log(json);
                 reject(json);
             });
         })

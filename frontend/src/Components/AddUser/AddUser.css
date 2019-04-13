@@ -6,10 +6,3 @@
     align-items: center;
     justify-content: center;
 }
-
-@media only screen and (max-width: 800px) 
-{
-    .mainContainer{
-        margin-top: 60px;
-    }
-}

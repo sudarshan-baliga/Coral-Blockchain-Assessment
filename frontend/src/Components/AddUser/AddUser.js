@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import "./AddUser.css";
 import Form from "../Form/Form";
-import { insertUsr } from "../../ServerRequests/userRequest";
+import { insertUsr, searchUser } from "../../ServerRequests/userRequest";
 import SearchBar from "../Search/Search";
 
 export default class AddUser extends Component {
@@ -84,7 +84,6 @@ export default class AddUser extends Component {
                     phone: this.state.phone
                 }
                 insertUsr(userData).then(response => {
-                    console.log(response, "in user");
                     this.setState({ snackMessage: response.message, snackShow: true, snackClass: "greenBackground" });
                 })
             }
@@ -109,7 +108,33 @@ export default class AddUser extends Component {
         }
         else {
             this.setState({ snackShow: false, searchEmailValid: true });
-            console.log(this.state.searchEmail)
+            let userData = { email: this.state.searchEmail };
+            searchUser(userData).then((userData) => {
+                if (userData.exists) {
+                    this.setState({
+                        snackMessage: userData.message,
+                        snackShow: true,
+                        snackClass: "greenBackground",
+                        email: userData.data.emailId,
+                        password: userData.data.password,
+                        userName: userData.data.userName,
+                        phone: userData.data.phoneNo,
+                        emailValid: true,
+                        phoneValid: true,
+                        passwordValid: true,
+                        userNameValid: true
+                    })
+                }
+                else {
+                    this.setState({
+                        snackMessage: userData.message,
+                        snackShow: true,
+                        snackClass: "redBackground"
+                    })
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
         }
     }
 

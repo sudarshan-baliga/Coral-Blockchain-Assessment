@@ -10,7 +10,9 @@ router.post("/insertUser", async function (req, res) {
     let errorInUserCheck = false;
     let userExists = false;
     try {
-        userExists = await checkUserExist(req.body.email);
+        let searchUser = await checkUserExist(req.body.email);
+        if (searchUser["emailId"] == req.body.email)
+            userExists = true;
     }
     catch (err) {
         errorInUserCheck = true;
@@ -64,5 +66,47 @@ router.post("/insertUser", async function (req, res) {
         });
     }
 });
+
+
+router.post("/searchUser", async function (req, res) {
+    let userExists = false;
+    let userData = {};
+    let errorInUserCheck = false;
+    try {
+        let searchUser = await checkUserExist(req.body.email);
+        if (searchUser["emailId"] == req.body.email) {
+            userExists = true;
+            userData = searchUser;
+        }
+    }
+    catch (err) {
+        errorInUserCheck = true;
+    }
+    if (errorInUserCheck) {
+        res.status(500).send({
+            success: false,
+            message: 'Internal server error. There was an error in checking user existance in database',
+        });
+    }
+    else {
+        if (!userExists) {
+            res.status(200).send({
+                success: true,
+                message: 'User does not exists in database',
+                exists: false
+            });
+        }
+        else {
+            res.status(200).send({
+                success: true,
+                message: 'User exists in the  database',
+                data: userData,
+                exists: true
+            });
+        }
+    }
+});
+
+
 
 module.exports = router;
