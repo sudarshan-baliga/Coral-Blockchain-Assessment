@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import "./AddUser.css";
 import Form from "../Form/Form";
 import { insertUsr } from "../../ServerRequests/userRequest";
+import SearchBar from "../Search/Search";
 
 export default class AddUser extends Component {
     // global state of this component
@@ -15,9 +16,9 @@ export default class AddUser extends Component {
         password: "",
         phone: "",
         formValid: false,
-        snackShow: false,
-        snackMessage: "",
-        snackClass: "redBackground"
+        snackShow: true,
+        snackMessage: "Search for the email and edit the form or directly insert data into the form",
+        snackClass: "greenBackground"
     };
     //different fields in the form
     fields = ["email", "password", "phone", "userName"];
@@ -97,6 +98,7 @@ export default class AddUser extends Component {
     render() {
         return (
             <Fragment>
+                <SearchBar />
                 <Form
                     {...this.state}
                     handleFormInpChange={this.handleFormInpChange}

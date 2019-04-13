@@ -1,0 +1,13 @@
+.searchContainer{
+    position: absolute !important;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    max-width: 80% !important;
+}
+.searchBar{
+    margin-bottom: 10px !important;
+    width: 480px;
+    max-width: 80% !important;
+}
+

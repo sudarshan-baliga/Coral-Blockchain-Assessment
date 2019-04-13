@@ -45,12 +45,12 @@ export default class AddUser extends Component {
                         onChange={this.props.handleFormInpChange("phone")}
                     />
                     <Button variant="contained" color="primary" onClick={this.props.submitForm} >
-                        Submit
+                        Insert/Update
                 </Button>
 
                 </form>
                 <Snackbar
-                    anchorOrigin={{ horizontal: "left", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
                     open={this.props.snackShow}
                     autoHideDuration={10000}
                     onClose={this.props.hideSnack}
