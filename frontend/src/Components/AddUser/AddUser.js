@@ -79,15 +79,18 @@ export default class AddUser extends Component {
                     userName: this.state.userName,
                     phone: this.state.phone
                 }
-                insertUsr(userData);
+                insertUsr(userData).then(response =>{
+                    console.log(response, "in user");
+                    this.setState({snackMessage:response.message, snackShow: true});
+                })
             }
             else
                 this.setState({ snackShow: true });
 
         })
-        .catch(err=>{
-            console.log(err);
-        });
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     render() {

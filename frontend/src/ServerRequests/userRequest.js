@@ -9,16 +9,23 @@ export function insertUsr(userData) {
         password: userData.password
     };
     console.log("body", body);
-    fetch(reqUrl, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }).then(res => {
-        console.log("res", body, res);
-    }).catch(err => {
-        console.log("err", body, err);
-    })
+    return new Promise((resolve, reject) => {
+        fetch(reqUrl, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        }).then(res => {
+            res.json().then(json => {
+                console.log(json);
+                resolve(json);
+            });
+        }).catch(err => {
+            err.json().then(json => {
+                console.log(json);
+                reject(json);
+            });
+        })
+    });
 }
