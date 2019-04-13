@@ -9,10 +9,12 @@ export default class AddUser extends Component {
     state = {
         userNameValid: true,
         emailValid: true,
+        searchEmailValid: true,
         passwordValid: true,
         phoneValid: true,
         userName: "",
         email: "",
+        searchEmail: "",
         password: "",
         phone: "",
         formValid: false,
@@ -33,7 +35,7 @@ export default class AddUser extends Component {
     errMsg = "";
 
     //called when the form input element value is changed
-    handleFormInpChange = field => event => {
+    handleInputChange = field => event => {
         this.setState({ [field]: event.target.value });
     }
 
@@ -95,18 +97,38 @@ export default class AddUser extends Component {
             });
     }
 
+    search = () => {
+        //validate the search email
+        if (!this.state["searchEmail"].match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/)) {
+            this.setState({
+                snackShow: true,
+                snackClass: "redBackground",
+                snackMessage: "search email not valid",
+                searchEmailValid: false
+            });
+        }
+        else {
+            this.setState({ snackShow: false, searchEmailValid: true });
+            console.log(this.state.searchEmail)
+        }
+    }
+
     render() {
         return (
-            <Fragment>
-                <SearchBar />
+            <div className="mainContainer" >
+                <SearchBar
+                    search={this.search}
+                    handleInputChange={this.handleInputChange}
+                    searchEmailValid={this.state.searchEmailValid}
+                />
                 <Form
                     {...this.state}
-                    handleFormInpChange={this.handleFormInpChange}
+                    handleInputChange={this.handleInputChange}
                     hideSnack={this.hideSnack}
                     validate={this.validate}
                     submitForm={this.submitForm}
                 />
-            </Fragment>
+            </div>
         )
     }
 }

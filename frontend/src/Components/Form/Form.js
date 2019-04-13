@@ -18,7 +18,7 @@ export default class AddUser extends Component {
                         autoComplete="current-password"
                         className="inpField"
                         value={this.props.userName}
-                        onChange={this.props.handleFormInpChange("userName")}
+                        onChange={this.props.handleInputChange("userName")}
                     />
                     <TextField
                         error={!this.props.passwordValid}
@@ -26,7 +26,7 @@ export default class AddUser extends Component {
                         type="password"
                         className="inpField"
                         value={this.props.password}
-                        onChange={this.props.handleFormInpChange("password")}
+                        onChange={this.props.handleInputChange("password")}
                     />
                     <TextField
                         error={!this.props.emailValid}
@@ -34,7 +34,7 @@ export default class AddUser extends Component {
                         type="email"
                         className="inpField"
                         value={this.props.email}
-                        onChange={this.props.handleFormInpChange("email")}
+                        onChange={this.props.handleInputChange("email")}
                     />
                     <TextField
                         error={!this.props.phoneValid}
@@ -42,7 +42,7 @@ export default class AddUser extends Component {
                         type="tel"
                         className="inpField"
                         value={this.props.phone}
-                        onChange={this.props.handleFormInpChange("phone")}
+                        onChange={this.props.handleInputChange("phone")}
                     />
                     <Button variant="contained" color="primary" onClick={this.props.submitForm} >
                         Insert/Update
@@ -50,7 +50,7 @@ export default class AddUser extends Component {
 
                 </form>
                 <Snackbar
-                    anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+                    anchorOrigin={{ horizontal: "left", vertical: "top" }}
                     open={this.props.snackShow}
                     autoHideDuration={10000}
                     onClose={this.props.hideSnack}
