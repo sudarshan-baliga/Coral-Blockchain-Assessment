@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import "./AddUser.css";
 import Form from "../Form/Form";
+import { insertUsr } from "../../ServerRequests/userRequest";
 
 export default class AddUser extends Component {
     // global state of this component
@@ -35,23 +36,27 @@ export default class AddUser extends Component {
     }
 
     //validate all the fields of the form
+    //set state is asynchronous and taking time so used promise
     validate = () => {
-        let regex = {
-            email: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
-            phone: /[0-9]{10}/,
-            password: /[0-9]{5,}/,
-            userName: /[a-zA-Z]{5,}/
-        }
-        this.errMsg = "";
-        this.fields.map(field => {
-            let res = this.state[field].match(regex[field])
-            let fieldValidity = field + "Valid";
-            if (!res) {
-                this.errMsg +=  this.errMessages[field];
-                this.setState({ [fieldValidity]: false, formValid: false, snackMessage: [this.errMsg] })
+        return new Promise((resolve, reject) => {
+            let regex = {
+                email: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
+                phone: /[0-9]{10}/,
+                password: /[0-9]{5,}/,
+                userName: /[a-zA-Z]{5,}/
             }
-            else
-                this.setState({ [fieldValidity]: true });
+            this.errMsg = "";
+            this.fields.map(field => {
+                let res = this.state[field].match(regex[field])
+                let fieldValidity = field + "Valid";
+                if (!res) {
+                    this.errMsg += this.errMessages[field];
+                    this.setState({ [fieldValidity]: false, formValid: false, snackMessage: [this.errMsg] })
+                }
+                else
+                    this.setState({ [fieldValidity]: true });
+            });
+            resolve("success");
         });
     }
 
@@ -66,25 +71,35 @@ export default class AddUser extends Component {
     //called when submit button is pressed
     submitForm = () => {
         this.setState({ formValid: true, snackMessage: "", snackShow: false });
-        console.log(this.state);
-        this.validate();
-        if (this.state.formValid) {
-            //make request to the server
-        }
-        else
-            this.setState({ snackShow: true });
+        this.validate().then(result => {
+            if (this.state.formValid) {
+                let userData = {
+                    email: this.state.email,
+                    password: this.state.password,
+                    userName: this.state.userName,
+                    phone: this.state.phone
+                }
+                insertUsr(userData);
+            }
+            else
+                this.setState({ snackShow: true });
+
+        })
+        .catch(err=>{
+            console.log(err);
+        });
     }
 
     render() {
         return (
             <Fragment>
-                <Form 
-                {...this.state}  
-                handleFormInpChange = {this.handleFormInpChange}
-                hideSnack = {this.hideSnack}
-                validate = {this.validate}
-                submitForm = {this.submitForm}
-            />
+                <Form
+                    {...this.state}
+                    handleFormInpChange={this.handleFormInpChange}
+                    hideSnack={this.hideSnack}
+                    validate={this.validate}
+                    submitForm={this.submitForm}
+                />
             </Fragment>
         )
     }

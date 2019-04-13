@@ -5,7 +5,7 @@ checkUserExists = (email)=> {
     
 }
 
-router.post("/addUser", function (req, res) {
+router.post("/insertUser", function (req, res) {
     console.log("add user request", req.body);
     // let connection = require('../lib/db');
     let query = "insert into userData(userName, emailId, phoneNo, password, dateTime) values(?,?,?)";
