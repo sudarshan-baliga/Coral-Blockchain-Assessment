@@ -7,9 +7,10 @@ checkUserExists = (email)=> {
 
 router.post("/insertUser", function (req, res) {
     console.log("add user request", req.body);
+    res.send({success: "true"});
     // let connection = require('../lib/db');
-    let query = "insert into userData(userName, emailId, phoneNo, password, dateTime) values(?,?,?)";
-    let inpData = req.body;
+    // let query = "insert into userData(userName, emailId, phoneNo, password, dateTime) values(?,?,?)";
+    // let inpData = [];
     // connection.query(query, [inpData.id, inpData.init_time, inpData.end_time], function (error, results, fields) {
     //     if (error) {
     //         console.log(error);
