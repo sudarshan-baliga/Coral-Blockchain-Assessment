@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 
 //redirect the requests to api
 app.use("/", api);
-// app.use(express.static("./build"));
+app.use(express.static("./build"));
 
 //listen for the requests
 app.listen(3001, () => {

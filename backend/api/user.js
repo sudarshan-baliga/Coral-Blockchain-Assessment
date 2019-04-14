@@ -68,6 +68,7 @@ router.post("/insertUser", async function (req, res) {
 
 
 router.post("/searchUser", async function (req, res) {
+    console.log("search user request", req.body);
     let userExists = false;
     let userData = {};
     let errorInUserCheck = false;
