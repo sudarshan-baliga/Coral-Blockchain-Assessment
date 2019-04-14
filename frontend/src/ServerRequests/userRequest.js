@@ -1,4 +1,4 @@
-const URL = "http://localhost:3001/user"
+const URL = "/user"
 
 export function insertUsr(userData) {
     let reqUrl = URL + "/insertUser";

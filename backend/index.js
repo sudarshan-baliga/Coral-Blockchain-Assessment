@@ -19,6 +19,6 @@ app.use("/", api);
 app.use(express.static("./build"));
 
 //listen for the requests
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001');
 });
