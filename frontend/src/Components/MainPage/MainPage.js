@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import "./AddUser.css";
+import React, { Component } from 'react'
+import "./MainPage.css";
 import Form from "../Form/Form";
 import { insertUsr, searchUser } from "../../ServerRequests/userRequest";
 import SearchBar from "../Search/Search";
@@ -27,9 +27,9 @@ export default class AddUser extends Component {
     //error messages to be shown in snackbar
     errMessages = {
         email: "Email not valid\n",
-        phone: "Phone number not valid (10 digits)\n",
-        password: "password not valid (5+ digits)\n",
-        userName: "user name not valid (5+ alphabets)\n"
+        phone: "Phone number not valid (10 digits and no characters)\n",
+        password: "password not valid (Must have 5+ symbols)\n",
+        userName: "user name not valid (Must have 5+ symbols)\n"
     }
     //current error message
     errMsg = "";
@@ -45,9 +45,9 @@ export default class AddUser extends Component {
         return new Promise((resolve, reject) => {
             let regex = {
                 email: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
-                phone: /[0-9]{10}/,
-                password: /[0-9]{5,}/,
-                userName: /[a-zA-Z]{5,}/
+                phone: /^[0-9]{10}$/,
+                password: /(.....).*/,
+                userName: /[a-zA-Z0-9]{4,}/
             }
             this.errMsg = "";
             this.fields.map(field => {
@@ -85,6 +85,9 @@ export default class AddUser extends Component {
                 }
                 insertUsr(userData).then(response => {
                     this.setState({ snackMessage: response.message, snackShow: true, snackClass: "greenBackground" });
+                }).catch(err => {
+                    console.log(err);
+                    this.setState({ snackMessage: "could not talk to server", snackShow: true, snackClass: "redBackground" })
                 })
             }
             else
@@ -134,6 +137,7 @@ export default class AddUser extends Component {
                 }
             }).catch((err) => {
                 console.log(err);
+                this.setState({ snackMessage: "could not talk to server", snackShow: true, snackClass: "redBackground" })
             });
         }
     }

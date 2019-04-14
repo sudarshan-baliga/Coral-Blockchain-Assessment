@@ -18,4 +18,13 @@ connection.connect(function (err) {
     console.log('successfully connected to mysql as id ' + connection.threadId);
 });
 
+connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+      console.log("mysql connection closed automatically")                      
+    } else {                                      
+      throw err;
+    }
+  });
+
 module.exports = connection;

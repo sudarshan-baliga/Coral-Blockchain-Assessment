@@ -20,9 +20,8 @@ export function insertUsr(userData) {
                 resolve(json);
             });
         }).catch(err => {
-            err.json().then(json => {
-                reject(json);
-            });
+            console.log(err);
+            reject("error in comunicating with server");
         })
     });
 }
@@ -45,9 +44,8 @@ export function searchUser(userData) {
                 resolve(json);
             });
         }).catch(err => {
-            err.json().then(json => {
-                reject(json);
-            });
+            console.log(err);
+            reject("error in comunicating with server");
         })
     });
 }

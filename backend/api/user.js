@@ -3,7 +3,6 @@ var router = express.Router();
 var checkUserExist = require("../lib/checkUserExists");
 var connection = require('../lib/db');
 
-
 router.post("/insertUser", async function (req, res) {
     console.log("add user request", req.body);
     let query = "";

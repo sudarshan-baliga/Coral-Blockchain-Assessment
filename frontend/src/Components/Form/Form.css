@@ -1,5 +1,5 @@
 .formContainer{
-    max-width: 80%;
+    max-width: 85%;
     width: 480px;
     padding: 10px;
     box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
@@ -10,6 +10,7 @@
     width: 90%;
     margin: 10px !important;
 }
+
 
 #snackMsg
 {
@@ -29,4 +30,12 @@
 div.snackBar > div
 {
     justify-content: center !important;
+}
+
+@media only screen and (max-width: 500px)
+{
+    .snackBar{
+        position: absolute !important;
+        top: 93% !important;
+    }
 }

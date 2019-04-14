@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import Form from "./Components/Form/Form.js"
-import AddUser from "./Components/AddUser/AddUser";
+import MainPage from "./Components/MainPage/MainPage";
 class App extends Component {
   render() {
     return (
       <div className="App">
-          {/* <Form/> */}
-          <AddUser/>
+          <MainPage/>
       </div> 
     );
   }
